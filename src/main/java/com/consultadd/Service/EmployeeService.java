@@ -1,39 +1,51 @@
 package com.consultadd.Service;
 
-import java.util.*;
 import com.consultadd.model.Employee;
 import com.consultadd.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-   public  List<Employee> getEmployee(){
+    public List<Employee> getEmployee() {
         return employeeRepository.findAll();
     }
 
-    public String saveEmployees(Employee employee){
-        if(employeeRepository.existsById(employee.getId())){
+    public String saveEmployees(Employee employee) {
+        if (employeeRepository.existsById(employee.getId())) {
             return "Data exist already";
-        }else{
+        } else {
             employeeRepository.save(employee);
             return "Saved succesfully";
         }
     }
 
-    public String UpdateEmployees(Employee employee){
-       if(employeeRepository.existsById(employee.getId())){
-           employee.setId(employee.getId());
-           employee.setName(employee.getName());
-           employee.setAge(employee.getAge());
-           return "data updated succesfully";
-       }else{
-           saveEmployees(employee);
-           return "data has been saved";
-
-       }
+    public String updateEmployee(Employee employee) {
+        if (!employeeRepository.existsById(employee.getId())) {
+            return "Couldn't update data. Id doesn't exists.";
+        } else {
+            employeeRepository.save(employee);
+            return "Employee data saved successfully.";
+        }
     }
+
+    public String deleteEmployee(Employee employee) {
+        if (!employeeRepository.existsById(employee.getId())) {
+            return "Couldn't Delete Data. Id doesn't exists.";
+        } else {
+            employeeRepository.delete(employee);
+            return "Employee data deleted successfully.";
+        }
+    }
+public List<Employee> findAllByCity(String city){
+        return employeeRepository.findAllByCity(city);
+}
+
+
+
 }

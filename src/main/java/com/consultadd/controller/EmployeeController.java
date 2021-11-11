@@ -3,10 +3,8 @@ package com.consultadd.controller;
 
 import com.consultadd.Service.EmployeeService;
 import com.consultadd.model.Employee;
-import com.consultadd.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,10 +25,25 @@ public class EmployeeController {
     }
 
     @PutMapping("/updateemp")
-    public String updateEmployee(@PathVariable String id,@Validated @RequestBody Employee employee){
-        return employeeService.UpdateEmployees(employee);
+    public String updateEmployee( @RequestBody Employee employee){
+        return employeeService.updateEmployee(employee);
     }
 
+    @DeleteMapping("/delemp")
+    public String deleteEmployee(@RequestBody Employee employee){
+        return employeeService.deleteEmployee(employee);
+    }
+
+    @GetMapping("/employee/{city}")
+    public ResponseEntity findAllByCity (@PathVariable  String city){
+        return ResponseEntity.ok(employeeService.findAllByCity(city));
+    }
+
+    @GetMapping("/employee/{age}")
+    public ResponseEntity agegretaerthan10 (@PathVariable  int age,String city){
+        return ResponseEntity.ok(employeeService.agegreaterthanten(age));
+
+    }
 
 }
 
