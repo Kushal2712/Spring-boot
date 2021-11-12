@@ -9,6 +9,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
 @Entity
 public class Employee {
     @Id
@@ -18,4 +19,6 @@ public class Employee {
 
 
     private String city;
+
+
 }

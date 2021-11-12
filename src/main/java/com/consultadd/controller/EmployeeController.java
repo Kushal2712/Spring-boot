@@ -39,11 +39,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.findAllByCity(city));
     }
 
-    @GetMapping("/employee/{age}")
-    public ResponseEntity agegretaerthan10 (@PathVariable  int age,String city){
-        return ResponseEntity.ok(employeeService.agegreaterthanten(age));
-
-    }
+   
 
 }
 
